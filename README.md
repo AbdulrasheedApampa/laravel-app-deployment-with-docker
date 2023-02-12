@@ -42,9 +42,9 @@
 #### To configure PHP, you will create the local.ini file inside the php folder. This is the file that you bind-mounted to /usr/local/etc/php/conf.d/local.ini inside #### the our laravel-app container. Creating this file will allow you to override the default php.ini file that PHP reads when it starts.
 
 ### Create the php directory inside our laravel-app directory:
-          mkdir ~/laravel-app/php
+          mkdir /laravel-app/php
 #### next you have nano out the local.ini inside the php directory.
-         nano ~/laravel-app/php/local.ini
+         nano laravel-app/php/local.ini
 #### The default php.ini file has an upload limit set to 2M. As an example, we will show you to adjust and set php configurations by changing the value of the allowed #### upload limit, in case you want to upload larger files. Enter the following lines of code inside the file:
         upload_max_filesize=40M
         post_max_size=40M
@@ -52,7 +52,7 @@
 #### In this step, we will configure Nginx to use the php service we defined earlier. It will use PHP-FPM as the FastCGI server to serve dynamic content. FastCGI server is a software that enables interactive programs to interface with a web server.
 #### To configure Nginx, you will create an app.conf file with the service configuration in the ~/laravel-app/nginx/conf.d/ folder.
 #### create the nginx/conf.d/ directory
-        mkdir -p ~/laravel-app/nginx/conf.d
+        mkdir -p laravel-app/nginx/conf.d
  #### Next create app.conf configuration file inside you nginx/conf.d directory
          nano ~/laravel-app/nginx/conf.d/app.conf
  #### Add the following line of code insed the app.conf to specify nginx configuration
@@ -83,9 +83,9 @@
 
 #### To demonstrate how this works, we’ll add settings to the my.cnf file that enable the general query log and specify the log file.
 #### create mysql directory;
-          mkdir ~/laravel-app/mysql
+          mkdir laravel-app/mysql
 #### Next create a file inside your mysql directory
-          nano ~/laravel-app/mysql/my.cnf
+          nano laravel-app/mysql/my.cnf
 #### In the file, add the following code to enable the query log and set the log file location:
           [mysqld]
         general_log = 1
@@ -127,9 +127,9 @@
          mysql -u root -p
 #### You will be prompted for the password you set for the MySQL root account during installation in your docker-compose file.
 #### Next, create the user account that will be allowed to access this database. in my case, my username is laravel, though you can replace this with another name if you’d prefer. Just be sure that your username and password here match the details you set in your .env file in the previous step:
-           MYSQL> GRANT ALL ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'your_laravel_db_password';
+           GRANT ALL ON laravel.* TO 'laravel'@'%' IDENTIFIED BY 'your_laravel_db_password';
 #### Flush the privileges to notify the MySQL server of the changes:
-          MYSQL> FLUSH PRIVILEGES;
+          FLUSH PRIVILEGES;
 #### Then exit mysql and exit your container also
 ## Step - 7 Migration, composer install and composer update
  #### Run the below commands
